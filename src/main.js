@@ -1,6 +1,6 @@
 import "./style.css";
 import * as THREE from "three";
-import { OrbitControls, ThreeMFLoader } from "three/examples/jsm/Addons.js";
+import { OrbitControls } from "three/examples/jsm/Addons.js";
 
 // Basic setup
 const scene = new THREE.Scene();
@@ -55,10 +55,14 @@ for (let i = 0; i < 200; i++) {
 }
 
 // Loading image(texture)
-const spaceTexture = new THREE.TextureLoader().load("../public/space.jpg");
+const spaceTexture = new THREE.TextureLoader().load(
+  "/3d-portfolio-website/space.jpg"
+);
 scene.background = spaceTexture;
 // Map for texture
-const reactTexture = new THREE.TextureLoader().load("/react.png");
+const reactTexture = new THREE.TextureLoader().load(
+  "/3d-portfolio-website/react.png"
+);
 const react = new THREE.Mesh(
   new THREE.BoxGeometry(3, 3, 3),
   new THREE.MeshStandardMaterial({ map: reactTexture })
@@ -66,8 +70,12 @@ const react = new THREE.Mesh(
 react.position.set(55, -15, -20);
 scene.add(react);
 // Normal map for texture, NOTE: vectors bounce depending on rgb
-const moonTexture = new THREE.TextureLoader().load("/moon.jpg");
-const normalMap = new THREE.TextureLoader().load("/normal.jpg");
+const moonTexture = new THREE.TextureLoader().load(
+  "/3d-portfolio-website/moon.jpg"
+);
+const normalMap = new THREE.TextureLoader().load(
+  "/3d-portfolio-website/normal.jpg"
+);
 const moon = new THREE.Mesh(
   new THREE.SphereGeometry(3, 32, 32),
   new THREE.MeshStandardMaterial({ map: moonTexture, normalMap: normalMap })
