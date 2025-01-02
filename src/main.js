@@ -92,9 +92,9 @@ function moveCamera() {
   moon.rotation.y += 0.035;
   moon.rotation.z += 0.02;
 
-  react.rotation.x += top * -0.00006;
-  react.rotation.y += top * -0.00008;
-  react.rotation.z += top * -0.00008;
+  react.rotation.x = top * -0.001;
+  react.rotation.y = top * -0.002;
+  react.rotation.z = top * -0.002;
 }
 document.body.onscroll = moveCamera;
 
