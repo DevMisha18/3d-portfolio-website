@@ -16,12 +16,20 @@ const renderer = new THREE.WebGLRenderer({
 renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(window.innerWidth, window.innerHeight);
 camera.position.setZ(42);
+window.addEventListener("resize", () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+});
 
 // Creating objects
 const geometry = new THREE.TorusGeometry(10, 3, 16, 100);
 const material = new THREE.MeshStandardMaterial({ color: 0xff6347 });
 const torus = new THREE.Mesh(geometry, material);
-torus.position.set(55, -15, -20);
+let x;
+window.innerWidth < 850 ? (x = 23) : (x = 45);
+window.innerWidth < 700 ? (x = 13) : x;
+window.innerWidth < 500 ? (x = 13) : x;
+torus.position.set(x, -15, -20);
 scene.add(torus);
 
 // PointList(light bolb)
@@ -67,7 +75,7 @@ const react = new THREE.Mesh(
   new THREE.BoxGeometry(3, 3, 3),
   new THREE.MeshStandardMaterial({ map: reactTexture })
 );
-react.position.set(55, -15, -20);
+react.position.set(x, -15, -20);
 scene.add(react);
 // Normal map for texture, NOTE: vectors bounce depending on rgb
 const moonTexture = new THREE.TextureLoader().load(
@@ -80,7 +88,7 @@ const moon = new THREE.Mesh(
   new THREE.SphereGeometry(3, 32, 32),
   new THREE.MeshStandardMaterial({ map: moonTexture, normalMap: normalMap })
 );
-moon.position.set(-17, 5, 25);
+moon.position.set(-10, 10, 10);
 scene.add(moon);
 
 // Create custom functionality on scrolling
@@ -88,13 +96,13 @@ function moveCamera() {
   // returns el.top - viewport.top
   const rect = document.body.getBoundingClientRect();
   const top = rect.top;
+  react.rotation.x = top * -0.002;
+  react.rotation.y = top * -0.004;
+  react.rotation.z = top * -0.004;
+
   moon.rotation.x += 0.02;
   moon.rotation.y += 0.035;
   moon.rotation.z += 0.02;
-
-  react.rotation.x = top * -0.001;
-  react.rotation.y = top * -0.002;
-  react.rotation.z = top * -0.002;
 }
 document.body.onscroll = moveCamera;
 
